@@ -316,6 +316,21 @@ if (!class_exists('MultiPostThumbnails')) {
 			return apply_filters("{$post_type}_{$thumb_id}_thumbnail_html", $html, $post_id, $post_thumbnail_id, $size, $attr);
 		}
 
+	        /**
+	         * Retrieve Post Thumbnail Meta.
+	         *
+	         * @param string $post_type The post type.
+	         * @param string $id The id used to register the thumbnail.
+	         * @param int $post_id Post ID.
+	         * @return arrray
+	         */
+	        public static function get_post_thumbnail_meta($post_type, $id, $post_id) {
+	            $thumbnail_id = self::get_post_thumbnail_id($post_type, $id, $post_id);
+	            $thumbnail_image = get_posts(array('p' => $thumbnail_id, 'post_type' => 'attachment'));
+	
+	            return $thumbnail_image;
+	        }
+
 		/**
 		 * Retrieve Post Thumbnail ID.
 		 *
